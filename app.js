@@ -26,6 +26,9 @@ app.get("/blog-single", (req, res) => {
 app.get("/contact", (req, res) => {
   res.render("site/contact");
 });
+app.get("/login", (req, res) => {
+  res.render("site/login");
+});
 
 app.listen(port, hostname, () => {
   console.log(`⁠Server running at http://${hostname}:${port}/`);
