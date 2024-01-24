@@ -25,5 +25,8 @@ router.get("/register", (req, res) => {
 router.get("/posts/new", (req, res) => {
   res.render("site/addpost");
 });
+router.post("/posts/test", (req, res) => {
+  res.redirect("/contact");
+});
 
 module.exports = router;
