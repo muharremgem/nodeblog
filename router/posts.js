@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
+const path = require("path");
 
 router.get("/new", (req, res) => {
   res.render("site/addpost");
@@ -13,9 +14,15 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/test", (req, res) => {
+  let post_image = req.files.post_image;
+
+  post_image.mv(
+    path.resolve(__dirname, "../public/img/postimages", post_image.name)
+  );
+
   Post.create(req.body);
+  console.log(req.files.post_image.name);
   res.redirect("/");
-  console.log(req.body);
 });
 
 module.exports = router;
