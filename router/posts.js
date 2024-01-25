@@ -20,9 +20,12 @@ router.post("/test", (req, res) => {
     path.resolve(__dirname, "../public/img/postimages", post_image.name)
   );
 
-  Post.create(req.body);
-  console.log(req.files.post_image.name);
-  res.redirect("/");
+  Post.create({
+    ...req.body,
+    post_image: `/img/postimages/${post_image.name}`,
+  });
+
+  res.redirect("/blog");
 });
 
 module.exports = router;

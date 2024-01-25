@@ -24,6 +24,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+const myMiddleware = (req, res, next) => {
+  console.log("Şampiyon Fenerbahçe");
+  next();
+};
+
+app.use("/", myMiddleware);
+
 const main = require("./router/main");
 const posts = require("./router/posts");
 
