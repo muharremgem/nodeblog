@@ -10,15 +10,15 @@ router.get("/about", (req, res) => {
 });
 router.get("/blog", (req, res) => {
   Post.find({})
-    .lean()  //.lean mongoose belgesi" olmaktan çıkıp, basit JavaScript nesnelerine dönüşmesini sağlar.  
+    .lean() //.lean mongoose belgesi" olmaktan çıkıp, basit JavaScript nesnelerine dönüşmesini sağlar.
     .then((posts) => {
       res.render("site/blog", { posts: posts });
       console.log(posts);
     });
 });
 
-router.get("/blog-single", (req, res) => {
-  res.render("site/blog-single");
+router.get("/post", (req, res) => {
+  res.render("site/post");
 });
 router.get("/contact", (req, res) => {
   res.render("site/contact");
@@ -31,4 +31,3 @@ router.get("/register", (req, res) => {
 });
 
 module.exports = router;
-
