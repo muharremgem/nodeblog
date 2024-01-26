@@ -36,10 +36,12 @@ app.use("/", myMiddleware);
 
 const main = require("./router/main");
 const posts = require("./router/posts");
-const { create } = require("./models/Post");
+const users = require("./router/users");
+// const { create } = require("./models/Post");
 
 app.use("/", main);
 app.use("/posts", posts);
+app.use("/users", users);
 
 app.listen(port, hostname, () => {
   console.log(`⁠Server running at http://${hostname}:${port}/`);
