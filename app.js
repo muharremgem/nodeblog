@@ -7,8 +7,8 @@ const hostname = "127.0.0.1";
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
-const moment = require('moment')
-
+const hbs = exphbs.create();
+const generateDate = require("./helpers/generateDate").generateDate;
 
 mongoose.connect("mongodb://localhost:27017/nodeblog_db");
 
@@ -16,15 +16,9 @@ app.use(fileUpload());
 
 app.use(express.static("public"));
 
-const hbs = exphbs.create({
-  helpers: {
-    generateDate: (date, format) => {
-      return moment(date).format(format);
-    },
-  },
-});
-
+hbs.handlebars.registerHelper("generateDate", generateDate);
 app.engine("handlebars", hbs.engine);
+
 app.set("view engine", "handlebars");
 
 // parse application/x-www-form-urlencoded
@@ -42,6 +36,7 @@ app.use("/", myMiddleware);
 
 const main = require("./router/main");
 const posts = require("./router/posts");
+const { create } = require("./models/Post");
 
 app.use("/", main);
 app.use("/posts", posts);
